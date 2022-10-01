@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CaseStudy1": {
+      "commandName": "Project",
+      "commandLineArgs": "n:\\comenv\\coll"
+    }
+  }
+}
