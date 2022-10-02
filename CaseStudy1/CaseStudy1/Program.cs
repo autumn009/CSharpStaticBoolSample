@@ -1,35 +1,17 @@
-﻿long count = 0;
-long sum = 0;
-long min = long.MaxValue;
-long max = long.MinValue;
-string minpath = "";
-string maxpath = "";
+﻿List<long> list = new List<long>();
 
 foreach (var fullpath in Directory.EnumerateFiles(args[0], "*.jpg", SearchOption.AllDirectories))
 {
-    count++;
-    long size = new FileInfo(fullpath).Length;
-    sum += size;
-    if (size < min)
+    list.Add(new FileInfo(fullpath).Length);
+    if ((list.Count & 4095) == 1)
     {
-        min = size;
-        minpath = fullpath;
-    }
-    if (size > max)
-    {
-        max = size;
-        maxpath = fullpath;
-    }
-    if ((count & 4095) == 1)
-    {
-        Console.Write(count);
+        Console.Write(list.Count);
         Console.Write('\r');
     }
 }
 
-Console.WriteLine($"Total Count of files: {count}");
-Console.WriteLine($"Sum of files: {sum}");
-Console.WriteLine($"Min size: {min}");
-Console.WriteLine($"Min path: {minpath}");
-Console.WriteLine($"Max size: {max}");
-Console.WriteLine($"Max path: {maxpath}");
+Console.WriteLine($"Total Count of files: {list.Count}");
+Console.WriteLine($"Sum of files: {list.Sum()}");
+Console.WriteLine($"Min size: {list.Min()}");
+Console.WriteLine($"Max size: {list.Max()}");
+Console.WriteLine($"Average: {list.Average()}");
